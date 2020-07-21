@@ -7,9 +7,9 @@ import {
   incrementAsync,
   selectCount,
 } from './counterSlice';
-import styles from './Counter.module.css';
+import styles from './styles.module.scss';
 
-export function Counter() {
+const Counter: React.FunctionComponent = () => {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
@@ -21,6 +21,7 @@ export function Counter() {
           className={styles.button}
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
+          type="button"
         >
           +
         </button>
@@ -29,6 +30,7 @@ export function Counter() {
           className={styles.button}
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
+          type="button"
         >
           -
         </button>
@@ -38,23 +40,25 @@ export function Counter() {
           className={styles.textbox}
           aria-label="Set increment amount"
           value={incrementAmount}
-          onChange={e => setIncrementAmount(e.target.value)}
+          onChange={(e) => setIncrementAmount(e.target.value)}
         />
         <button
           className={styles.button}
-          onClick={() =>
-            dispatch(incrementByAmount(Number(incrementAmount) || 0))
-          }
+          onClick={() => dispatch(incrementByAmount(Number(incrementAmount) || 0))}
+          type="button"
         >
           Add Amount
         </button>
         <button
           className={styles.asyncButton}
           onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
+          type="button"
         >
           Add Async
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default Counter;
